@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Armazen olimpus</title>
+	</head>
+	<body>
+		<input
+			type="text"
+			id="search"
+			placeholder="Search by name"
+			oninput="applyFilters()"
+		/>
+		<select id="category" onchange="applyFilters()">
+			<option value="">Tudo</option>
+			<option value="cozinha">Cozinha</option>
+			<option value="Roupa">Roupas</option>
+			<option value="tecnologia">Tecnologia</option>
+		</select>
+		<div id="products"></div>
+
+		<script src="src/script.js"></script>
+	</body>
+</html>
