@@ -1,11 +1,11 @@
 <?php
 
 class Database {
+    //Dados necessarios
     private $driver;
     private $host;
     private $dbname;
     private $username;
-    private $password;
     private $con;
 
     function __construct() {

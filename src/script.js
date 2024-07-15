@@ -1,71 +1,72 @@
+/*
+Todos: 
+Refatore o codigo
+Adicione um carrosel de imagens para cada item
+adicione uma pagina pra cada item com routing
+melhorar sistema de busca
+*/
+
 let allProducts = [];
+const searchInput = document.getElementById("search");
+const categorySelect = document.getElementById("category");
 
-// Função pra buscar os dados do endpoint do php
-async function fetchData() {
-	try {
-		const response = await fetch("getProducts.php");
-		const data = await response.json();
-		console.log(data);
+searchInput.addEventListener("input", delay(searchAndFilters, 600));
+categorySelect.addEventListener("change", searchAndFilters);
 
-		if (data.error) {
-			document.getElementById("products").innerText = "Error: " + data.error;
-		} else {
-			allProducts = data;
-			displayProducts(allProducts); // Usa displayProducts pra mostrar todos os produtos de inicio
-		}
-	} catch (error) {
-		console.error(error);
-		document.getElementById("products").innerText =
-			"ocorreu um erro adquirindo os produtos";
-	}
-}
-
-fetchData();
-
+// Função para exibir produtos
 function displayProducts(products) {
-	let productHTML = products
-		.map((product) => {
-			return `<div class="product">
-                <h1>${product.nome}</h1>
-                <p>${product.preco}</p>
-                <p>${product.descricao}</p>
-            </div>`;
-		})
+	const productHTML = products
+		.map(
+			(product) => `
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-center">${product.nome}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">$${product.preco}</h6>
+        <p class="card-text">${product.descricao}</p>
+      </div>
+    </div>
+  `
+		)
 		.join("");
-
+	// Define o html interno do elemento com  'products' para ser o html gerado a partir dos produtos
 	document.getElementById("products").innerHTML = productHTML;
 }
 
-function applyFilters() {
+// Função para buscar os dados do endpoint do PHP
+async function fetchData() {
+	try {
+		const response = await fetch("getProducts.php");
+		allProducts = await response.json();
+		displayProducts(allProducts);
+	} catch (error) {
+		console.error("Failed to fetch products:", error);
+		document.getElementById("products").innerText =
+			"Ocorreu um erro, por favor, retorne mais tarde.";
+	}
+}
+fetchData();
+
+// Função para aplicar filtros
+function searchAndFilters() {
 	const searchValue = document.getElementById("search").value.toLowerCase();
 	const categoryValue = document.getElementById("category").value;
 
 	const filteredProducts = allProducts.filter((product) => {
 		const productName = product.nome.toLowerCase();
-		const matchesSearch = searchValue
-			? productName.includes(searchValue)
-			: true;
-		const matchesCategory = categoryValue
-			? product.categoria === categoryValue
-			: true;
+		const matchesSearch = !searchValue || productName.includes(searchValue);
+		const matchesCategory =
+			!categoryValue || product.categoria === categoryValue;
 		return matchesSearch && matchesCategory;
 	});
 
 	displayProducts(filteredProducts);
 }
 
-// limita as vezes que a pesquisa pode ser chamada
-function debounce(func, delay) {
-	let debounceTimer;
-	return function () {
-		const context = this;
-		const args = arguments;
-		clearTimeout(debounceTimer);
-		debounceTimer = setTimeout(() => func.apply(context, args), delay);
+// Função para limitar a frequência de chamadas da função de procura
+function delay(func, delay) {
+	let delayTimer;
+	return function (...args) {
+		clearTimeout(delayTimer);
+		delayTimer = setTimeout(() => func.apply(this, args), delay);
 	};
 }
-
-document
-	.getElementById("search")
-	.addEventListener("input", debounce(applyFilters, 300));
-document.getElementById("category").addEventListener("change", applyFilters);
