@@ -7,6 +7,8 @@ $link = $con->getConnection();
 
 header('Content-Type: application/json');
 
+
+
 if ($link) {
     try {
         $stmt = $link->prepare("SELECT * FROM produtos");
