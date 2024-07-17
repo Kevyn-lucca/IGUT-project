@@ -1,3 +1,11 @@
+@font-face {
+	font-family: "Dalek";
+	src: url("DalekPinpointBold.ttf");
+}
+.Greek-font {
+	font-family: "dalek", sans-serif;
+}
+
 .truncate-wrap {
 	white-space: normal;
 	overflow: hidden;
@@ -11,7 +19,7 @@
 .modal {
 	display: none;
 	position: fixed;
-	z-index: 1;
+	z-index: 1050;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -26,7 +34,7 @@
 	margin: 15% auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 80%;
+	width: 30%;
 }
 
 .close {
@@ -41,4 +49,8 @@
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.scale-hover:hover {
+	transform: translateY(-10px);
 }

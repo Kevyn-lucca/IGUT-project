@@ -1,9 +1,7 @@
 /*
 Todos:
-adicionar estilização ao formulário
 adicinoar validação no formulário
 adicionar uma forma de salvar imagens (Caminho da imagem no banco de dados, imagens em si nos arquvos)
-adicionar forma de deletar um produto
 Refatore o codigo
 */
 
@@ -72,7 +70,7 @@ function displayProduct(product) {
             <h6 class="mb-2 text-muted">R$ ${product.preco}</h6>
             <p>${product.descricao}</p>
             <button id="editBtn" class="btn btn-outline-success mb-2">Editar</button>
-            <button class="btn btn-outline-danger">Deletar</button>
+            <button  onclick="deleteProduct(${product.id})" class="btn btn-outline-danger">Deletar</button>
         </div>
     </div>
     `;
@@ -114,3 +112,21 @@ document
 				"Ocorreu um erro ao atualizar o produto.";
 		}
 	});
+
+async function deleteProduct(productID) {
+	console.log(productID);
+	try {
+		const response = await fetch("deleteProduct.php", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ id: productID }),
+		});
+
+		const result = await response.json();
+		alert(result.message);
+	} catch (error) {
+		console.error("Erro ao deletar produto:", error);
+	}
+}
