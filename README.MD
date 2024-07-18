@@ -11,8 +11,8 @@ Este projeto tem como objetivo criar uma página web dinâmica que combina PHP, 
 
 Para configurar o ambiente, siga as instruções abaixo:
 
-1. Escolha um host MySQL de sua preferência (por exemplo, XAMPP, devido à sua fácil integração com Linux e administrador MySQL integrado).
-2. Crie uma tabela SQL chamada `produtos` em um banco de dados nomeado "MeusProdutos". Use o usuário "root" sem senha.
+1. Escolha um host MySQL de sua preferência (utilizei XAMPP, devido à sua fácil integração com Linux e administrador MySQL integrado).
+2. use a tabela `produtos` disponibilizada em um banco de dados MySQL nomeado "MeusProdutos". Use o usuário "root" sem senha.
 3. Caso utilize sua própria tabela de dados, o site ainda espera um banco de dados nomeado "MeusProdutos" com as mesmas especificações. A tabela de dados deve ser nomeada "produtos" com as colunas: `id`, `nome`, `descrição`, `preço`, `categoria`, `quantidade`.
 
 ### Estrutura PHP do Projeto
