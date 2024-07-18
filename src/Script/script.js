@@ -1,7 +1,3 @@
-/*
-Todos: 
-documente o codigo
-*/
 let allProducts = [];
 const searchInput = document.querySelector("#search");
 const categorySelect = document.querySelector("#category");
@@ -61,13 +57,13 @@ function searchAndFilters() {
 		const productName = product.nome.toLowerCase();
 		// Verifica se o produto corresponde ao valor de pesquisa.
 		const matchesSearch = !searchValue || productName.includes(searchValue);
-		// matches será verdadeiro se search estiver vazio ou se productName contiver searchValue'.
+		// matches será verdadeiro se search estiver vazio ou se productName contem searchValue.
 		// Verifica se o produto corresponde ao valor da categoria.
 		const matchesCategory =
 			!categoryValue || product.categoria === categoryValue;
 		// Retorna verdadeiro se o produto corresponder tanto ao valor de pesquisa quanto à categoria.
 		return matchesSearch && matchesCategory;
-		// O produto será incluído no resultado se algun dos critérios forem atendidos.
+		// O produto será incluído no resultado se os critérios forem atendidos.
 	});
 
 	displayProducts(filteredProducts);

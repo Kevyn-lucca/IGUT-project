@@ -11,7 +11,7 @@ class Database {
     function __construct() {
         $this->driver = "mysql";
         $this->host = "localhost";
-        $this->dbname = "Produtos";
+        $this->dbname = "MeusProdutos";
         $this->username = "root";
     }
 

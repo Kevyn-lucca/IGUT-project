@@ -1,10 +1,3 @@
-/*
-Todos:
-adicinoar validação no formulário
-adicionar quantidade no formulário
-adicionar uma forma de salvar imagens (Caminho da imagem no banco de dados, imagens em si nos arquvos)
-*/
-
 //pega o id a partir dos parametros passados na url.
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -39,21 +32,21 @@ function displayProduct(product) {
                     <div class="carousel-item active">
                         <img
                             class="d-block w-100"
-                            src="src/imgs/rebecca-aldama-G_GaeDNyMe8-unsplash.jpg"
+                            src="https://dummyimage.com/600x400/000/fff&text=placeHolder+600x400"
                             alt="slide img"
                         />
                     </div>
                     <div class="carousel-item">
                         <img
                             class="d-block w-100"
-                            src="src/imgs/steve-johnson-f-gxmsZlj9c-unsplash.jpg"
+                            src="https://dummyimage.com/600x400/000/fff&text=placeHolder+600x400"
                             alt="slide img"
                         />
                     </div>
                     <div class="carousel-item">
                         <img
                             class="d-block w-100"
-                            src="src/imgs/steve-johnson-ZUabNmumOcA-unsplash.jpg"
+                            src="https://dummyimage.com/600x400/000/fff&text=placeHolder+600x400"
                             alt="slide img"
                         />
                     </div>
