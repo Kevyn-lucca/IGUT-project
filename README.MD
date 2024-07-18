@@ -65,6 +65,6 @@ O JavaScript principal é o `script.js`, que faz a requisição de todos os dado
 
 O algoritmo de busca é chamado com o método `onInput` no HTML, o que faz a função `searchAndFilter` ser acionada sempre que o usuário digita no campo de texto. A função `search` recebe o valor do input e compara com os nomes dos produtos usando o método `filter` do array. Ambos os valores são convertidos para minúsculas para evitar conflitos. A filtragem por categoria funciona de maneira similar, usando `filter` para eliminar produtos que não pertencem à categoria selecionada.
 
-### CSS
+<p id = "css"> ### CSS </p>
 
 Foi utilizado Bootstrap junto com um CSS personalizado para criar os cards que representam os itens no estoque, proporcionando um design mais lúdico e garantindo responsividade.
