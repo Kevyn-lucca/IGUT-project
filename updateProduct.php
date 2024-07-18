@@ -10,6 +10,7 @@ header('Content-Type: application/json');
 $productID = intval($_POST['id']);
 $productNome = $_POST['nome'];
 $productPreco = $_POST['preco'];
+$productDescricao = $_POST['descricao'];
 
 //checa se não foram passados dados vazios e o id existe dentro do banco de dados
 if ($productID > 0 && !empty($productNome) && !empty($productPreco) && !empty($productDescricao)) {

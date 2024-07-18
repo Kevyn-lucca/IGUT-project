@@ -1,45 +1,24 @@
 /*
 Todos: 
-adicione a quantidade de itens
-Refatore o codigo
-//melhorar sistema de busca
-//Adicione um carrosel de imagens para cada item
-//adicione uma pagina pra cada item com routing
+documente o codigo
 */
-
 let allProducts = [];
-const searchInput = document.getElementById("search");
-const categorySelect = document.getElementById("category");
+const searchInput = document.querySelector("#search");
+const categorySelect = document.querySelector("#category");
+const ProductsDiv = document.querySelector("#products");
+const modal = document.querySelector(".modal");
+const addbtn = document.getElementById("AddBtn");
+const CloseBtn = document.getElementsByClassName("close")[0];
 
 searchInput.addEventListener("input", delay(searchAndFilters, 600));
 categorySelect.addEventListener("change", searchAndFilters);
-
-// Função para exibir produtos, usa o metodo map para gerar o html de cada um
-function displayProducts(products) {
-	const productHTML = products
-		.map(
-			(product) => `
-			<div class="shadow-sm scale-hover" style="width: 18rem; height:19rem"">
-			<a class="card   link-underline-opacity-0 link-underline" style="width: 18rem; height: 19rem " href="singleProduct.html?id=${product.id}">
-      <div class="card-body ">
-        <h5 class="card-title text-center">${product.nome}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">R$ ${product.preco}</h6>
-        <p class="card-text truncate-wrap "  >${product.descricao}</p>
-      </div>
-	  </a>
-	  </div>
-  `
-		)
-		.join("");
-	document.getElementById("products").innerHTML = productHTML;
-}
-
 // Função para buscar os dados do endpoint do php
+
 async function fetchData() {
 	try {
 		const response = await fetch("getProducts.php");
-		allProducts = await response.json();
-		displayProducts(allProducts);
+		ProductsData = await response.json();
+		displayProducts(ProductsData);
 	} catch (error) {
 		console.error(error);
 		document.getElementById("products").innerText =
@@ -48,10 +27,35 @@ async function fetchData() {
 }
 fetchData();
 
+// Função para exibir produtos, usa o metodo map para gerar o html de cada um
+function displayProducts(products) {
+	const productHTML = products
+		.map(
+			(product) => `
+
+			<div class="shadow-sm scale-hover" style="width: 18rem; height:19rem"">
+			<a class="card link-underline-opacity-0 link-underline" style="width: 18rem; height: 19rem " href="singleProduct.html?id=${product.id}">
+      <div class="card-body ">
+      
+        <h5 class="card-title text-center">${product.nome}</h5>
+        <div class ="d-flex justify-content-between"">
+        <h6 class="card-subtitle mb-2 text-muted">R$ ${product.preco}</h6>
+        <h6 class="card-subtitle mb-2 text-muted"> ${product.quantidade} restantes</h6>
+        </div>
+        <p class="card-text truncate-wrap "  >${product.descricao}</p>
+      </div>
+	  </a>
+	  </div>
+  `
+		)
+		.join("");
+	ProductsDiv.innerHTML = productHTML;
+}
+
 // Função para aplicar filtros e fazer as pesquisas
 function searchAndFilters() {
-	const searchValue = document.getElementById("search").value.toLowerCase();
-	const categoryValue = document.getElementById("category").value;
+	const searchValue = searchInput.value.toLowerCase();
+	const categoryValue = categorySelect.value;
 
 	const filteredProducts = allProducts.filter((product) => {
 		const productName = product.nome.toLowerCase();
@@ -72,15 +76,12 @@ function searchAndFilters() {
 // Função para limitar a frequência de chamadas da função de procura, evitando delays
 function delay(func, delay) {
 	let delayTimer;
-	return function (args) {
+	return (args) => {
 		clearTimeout(delayTimer);
 		delayTimer = setTimeout(() => func.apply(this, args), delay);
 	};
 }
-
-const modal = document.querySelector(".modal");
-const addbtn = document.getElementById("AddBtn");
-const CloseBtn = document.getElementsByClassName("close")[0];
+//controla o modal
 addbtn.onclick = function () {
 	modal.style.display = "block";
 	addbtn.classList.add = "disabled";
@@ -98,21 +99,20 @@ window.onclick = function (event) {
 
 document
 	.getElementById("edit-product-form")
-	.addEventListener("submit", async function (event) {
-		event.preventDefault();
+	.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const ResponseMessage = document.querySelector("#response-message");
 		const formData = new FormData(this);
-
 		try {
 			let response = await fetch("addProduct.php", {
 				method: "POST",
 				body: formData,
 			});
 			let result = await response.json();
-			document.getElementById("response-message").innerText =
+			ResponseMessage.innerText =
 				result.message || "Produto atualizado com sucesso!";
 		} catch (error) {
 			console.error(error);
-			document.getElementById("response-message").innerText =
-				"Ocorreu um erro ao atualizar o produto.";
+			ResponseMessage.innerText = "Ocorreu um erro ao atualizar o produto.";
 		}
 	});

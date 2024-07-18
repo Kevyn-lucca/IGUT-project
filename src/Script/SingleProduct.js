@@ -2,10 +2,10 @@
 Todos:
 adicinoar validação no formulário
 adicionar uma forma de salvar imagens (Caminho da imagem no banco de dados, imagens em si nos arquvos)
-Refatore o codigo
 */
 
 //pega o id a partir dos parametros passados na url.
+
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
 fetchProduct(productId);
@@ -67,7 +67,10 @@ function displayProduct(product) {
             </div>
         </div>
         <div class="col-md-4 d-flex flex-column justify-content-center">
-            <h6 class="mb-2 text-muted">R$ ${product.preco}</h6>
+                 <div class ="d-flex justify-content-between">
+        <h6 class="card-subtitle mb-2 text-muted">R$ ${product.preco}</h6>
+        <h6 class="card-subtitle mb-2 text-muted"> ${product.quantidade} restantes</h6>
+        </div>
             <p>${product.descricao}</p>
             <button id="editBtn" class="btn btn-outline-success mb-2">Editar</button>
             <button  onclick="deleteProduct(${product.id})" class="btn btn-outline-danger">Deletar</button>
@@ -112,9 +115,8 @@ document
 				"Ocorreu um erro ao atualizar o produto.";
 		}
 	});
-
+// controla o delete de produtos
 async function deleteProduct(productID) {
-	console.log(productID);
 	try {
 		const response = await fetch("deleteProduct.php", {
 			method: "POST",
