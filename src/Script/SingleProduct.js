@@ -1,6 +1,7 @@
 /*
 Todos:
 adicinoar validação no formulário
+adicionar quantidade no formulário
 adicionar uma forma de salvar imagens (Caminho da imagem no banco de dados, imagens em si nos arquvos)
 */
 
@@ -8,6 +9,7 @@ adicionar uma forma de salvar imagens (Caminho da imagem no banco de dados, imag
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("id");
+const productDiv = document.querySelector("#product");
 fetchProduct(productId);
 
 //puxa os dados do unico item a partir de seu id
@@ -18,13 +20,13 @@ async function fetchProduct(productID) {
 		displayProduct(product);
 	} catch (error) {
 		console.error(error);
-		document.getElementById("product").innerHTML =
+		productDiv.innerHTML =
 			"<div class='col-12 text-center' >Ocorreu um erro ao carregar os detalhes do produto, por favor retorne mais tarde.</div>";
 	}
 }
 
 function displayProduct(product) {
-	document.getElementById("product").innerHTML = `
+	productDiv.innerHTML = `
       <div class="row mb-4">
         <div class="col-12 text-center">
             <h1>${product.nome}</h1>
@@ -126,9 +128,10 @@ async function deleteProduct(productID) {
 			body: JSON.stringify({ id: productID }),
 		});
 
-		const result = await response.json();
-		alert(result.message);
+		productDiv.innerHTML =
+			"<div class='col-12 text-center' >Ocorreu um erro ao carregar os detalhes do produto, por favor retorne mais tarde.</div>";
 	} catch (error) {
+		alert("error ao deletar produto");
 		console.error("Erro ao deletar produto:", error);
 	}
 }

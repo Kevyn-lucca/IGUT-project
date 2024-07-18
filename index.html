@@ -84,8 +84,8 @@
 					<input type="hidden" id="product-id" name="id" />
 					<div class="row gap-3 mb-3">
 						<div class="col form-group">
-							<label for="product-nome">Nome:</label>
 							<input
+								placeholder="Nome do produto"
 								type="text"
 								id="product-nome"
 								name="nome"
@@ -95,14 +95,15 @@
 						</div>
 
 						<div class="col form-group">
-							<label for="product-preco">Preço:</label>
 							<input
+								placeholder="$99"
 								type="number"
 								id="product-preco"
 								name="preco"
 								class="form-control"
 							/>
 						</div>
+
 						<div class="col form-group">
 							<select
 								class="form-select"
@@ -114,6 +115,15 @@
 								<option value="roupa">Roupas</option>
 								<option value="tecnologia">Tecnologia</option>
 							</select>
+						</div>
+						<div class="col form-group">
+							<input
+								placeholder="Quantidade"
+								type="number"
+								id="product-quantidade"
+								name="quantidade"
+								class="form-control"
+							/>
 						</div>
 					</div>
 					<div class="form-group">
@@ -128,7 +138,10 @@
 
 					<button type="submit" class="btn mt-2 btn-primary">Salvar</button>
 				</form>
-				<div id="response-message"></div>
+				<div
+					class="mb-3 d-flex justify-content-center"
+					id="response-message"
+				></div>
 			</div>
 		</div>
 		<script

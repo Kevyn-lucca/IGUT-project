@@ -15,11 +15,12 @@ $productNome = $_POST['nome'];
 $productPreco = $_POST['preco'];
 $productDescricao = $_POST['descricao']; 
 $productCategoria = $_POST['categoria'];
+$productQuantidade = $_POST['quantidade'];
 
 // Checa se os dados necessários foram passados e não estão vazios
-if (!empty($productNome) && !empty($productPreco) && !empty($productDescricao) && !empty($productCategoria)) {
+if (!empty($productNome) && !empty($productPreco) && !empty($productDescricao) && !empty($productCategoria) && !empty($productQuantidade) ) {
     try {
-        $stmt = $link->prepare("INSERT INTO produtos (nome, preco, descricao, categoria) VALUES (:nome, :preco, :descricao, :categoria)");
+        $stmt = $link->prepare("INSERT INTO produtos (nome, preco, descricao, categoria,quantidade) VALUES (:nome, :preco, :descricao, :categoria, :quantidade)");
         $stmt->bindParam(':nome', $productNome, PDO::PARAM_STR);
         $stmt->bindParam(':preco', $productPreco, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $productDescricao, PDO::PARAM_STR);

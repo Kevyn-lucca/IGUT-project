@@ -57,7 +57,7 @@ function searchAndFilters() {
 	const searchValue = searchInput.value.toLowerCase();
 	const categoryValue = categorySelect.value;
 
-	const filteredProducts = allProducts.filter((product) => {
+	const filteredProducts = ProductsData.filter((product) => {
 		const productName = product.nome.toLowerCase();
 		// Verifica se o produto corresponde ao valor de pesquisa.
 		const matchesSearch = !searchValue || productName.includes(searchValue);
@@ -99,7 +99,7 @@ window.onclick = function (event) {
 
 document
 	.getElementById("edit-product-form")
-	.addEventListener("submit", async (e) => {
+	.addEventListener("submit", async function (e) {
 		e.preventDefault();
 		const ResponseMessage = document.querySelector("#response-message");
 		const formData = new FormData(this);

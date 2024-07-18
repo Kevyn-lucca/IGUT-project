@@ -37,12 +37,12 @@
 			<div class="modal-content">
 				<span class="close">&times;</span>
 				<h1 class="mb-0 text-center">Editar Produto</h1>
-				<form id="edit-product-form" method="POST" class="container mt-2">
+				<form id="edit-product-form" method="POST" class="container mt-4">
 					<input type="hidden" id="product-id" name="id" />
-					<div class="row">
+					<div class="row gap-1 mb-3">
 						<div class="col form-group">
-							<label for="product-nome">Nome:</label>
 							<input
+								placeholder="Nome do produto"
 								type="text"
 								id="product-nome"
 								name="nome"
@@ -52,11 +52,34 @@
 						</div>
 
 						<div class="col form-group">
-							<label for="product-preco">Preço:</label>
 							<input
-								type="text"
+								placeholder="$99"
+								type="number"
 								id="product-preco"
 								name="preco"
+								class="form-control"
+							/>
+						</div>
+
+						<div class="col form-group">
+							<select
+								class="form-select"
+								name="categoria"
+								id="product-categoria"
+								style="width: 17rem"
+							>
+								<option>escolha uma categoria</option>
+								<option value="cozinha">Cozinha</option>
+								<option value="roupa">Roupas</option>
+								<option value="tecnologia">Tecnologia</option>
+							</select>
+						</div>
+						<div class="col form-group">
+							<input
+								placeholder="Quantidade"
+								type="number"
+								id="product-quantidade"
+								name="quantidade"
 								class="form-control"
 							/>
 						</div>
@@ -73,7 +96,10 @@
 
 					<button type="submit" class="btn mt-2 btn-primary">Salvar</button>
 				</form>
-				<div id="response-message"></div>
+				<div
+					class="mb-3 d-flex justify-content-center"
+					id="response-message"
+				></div>
 			</div>
 		</div>
 	</body>
