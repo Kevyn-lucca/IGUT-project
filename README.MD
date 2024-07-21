@@ -11,11 +11,11 @@ Este projeto tem como objetivo criar uma página web dinâmica que combina PHP, 
 
 Para configurar o ambiente, siga as instruções abaixo:
 
-1. Escolha um host MySQL de sua preferência (por exemplo, XAMPP, devido à sua fácil integração com Linux e administrador MySQL integrado).
-2. Crie uma tabela SQL chamada `produtos` em um banco de dados nomeado "MeusProdutos". Use o usuário "root" sem senha.
+1. Escolha um host MySQL de sua preferência (utilizei XAMPP, devido à sua fácil integração com Linux e administrador MySQL integrado).
+2. use a tabela `produtos` disponibilizada em um banco de dados MySQL nomeado "MeusProdutos". Use o usuário "root" sem senha.
 3. Caso utilize sua própria tabela de dados, o site ainda espera um banco de dados nomeado "MeusProdutos" com as mesmas especificações. A tabela de dados deve ser nomeada "produtos" com as colunas: `id`, `nome`, `descrição`, `preço`, `categoria`, `quantidade`.
 
-### Estrutura PHP do Projeto
+<h2 id = "php"> Estrutura PHP do Projeto </h2>
 
 O PHP do projeto é dividido em 4 arquivos de requisição e um de conexão, seguindo o modelo de construção de software de mediador/middleware. O arquivo `class/database.class.php` realiza a conexão com o banco de dados, permitindo que os outros arquivos enviem e busquem dados sem a necessidade de reconexão.
 
@@ -57,14 +57,14 @@ if ($productID > 0 && !empty($productNome) && !empty($productPreco) && !empty($p
 
 O arquivo acima recebe os dados do formulário dentro de `singleProduct.html`, verifica se os dados não são nulos e então atualiza o objeto na tabela com o ID passado. Os arquivos `deleteProduct.php`, `getSingleProduct.php` e `getProducts.php` funcionam de maneira similar, realizando operações CRUD (Create, Read, Update, Delete) na tabela de produtos.
 
-### JavaScript
+<h2 id = "javascript"> JavaScript </h2>
 
 O JavaScript principal é o `script.js`, que faz a requisição de todos os dados da API (usando `getProducts`). Esses dados são armazenados em um array, e o método `map` é utilizado para gerar os cards exibidos no site. Armazenar os dados em um array facilita a implementação da funcionalidade de busca e filtro.
 
-#### Algoritmo de Busca
+<h3 id = "filtro-js"> Algoritmo de Busca </h2>
 
 O algoritmo de busca é chamado com o método `onInput` no HTML, o que faz a função `searchAndFilter` ser acionada sempre que o usuário digita no campo de texto. A função `search` recebe o valor do input e compara com os nomes dos produtos usando o método `filter` do array. Ambos os valores são convertidos para minúsculas para evitar conflitos. A filtragem por categoria funciona de maneira similar, usando `filter` para eliminar produtos que não pertencem à categoria selecionada.
 
-### CSS
+<h2 id = "css"> CSS </h2>
 
 Foi utilizado Bootstrap junto com um CSS personalizado para criar os cards que representam os itens no estoque, proporcionando um design mais lúdico e garantindo responsividade.
