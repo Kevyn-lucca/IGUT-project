@@ -9,7 +9,6 @@ header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-
 // Recebe os dados do produto via POST
 $productNome = $_POST['nome'];
 $productPreco = $_POST['preco'];
@@ -25,6 +24,7 @@ if (!empty($productNome) && !empty($productPreco) && !empty($productDescricao) &
         $stmt->bindParam(':preco', $productPreco, PDO::PARAM_STR);
         $stmt->bindParam(':descricao', $productDescricao, PDO::PARAM_STR);
         $stmt->bindParam(':categoria', $productCategoria, PDO::PARAM_STR);
+        $stmt->bindParam(':quantidade', $productQuantidade, PDO::PARAM_STR);
         $stmt->execute();
         
         echo json_encode(['message' => 'Produto adicionado com sucesso!']);
